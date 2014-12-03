@@ -18,10 +18,7 @@ fun main(args: Array<String>) {
 [EnableAutoConfiguration]
 [ComponentScan]
 [Controller]
-open class Application {
-  private [Autowired] val _hello: HelloService? = null
-  private val hello: HelloService
-    get() = _hello ?: throw AssertionError()
+open class Application[Autowired](val hello:HelloService) {
 
   [RequestMapping(array("/"))]
   fun home(model: Model): String {
