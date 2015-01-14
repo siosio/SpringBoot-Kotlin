@@ -10,20 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.stereotype.Controller
 import kotlin.properties.Delegates
 import org.springframework.ui.Model
-
-fun main(args: Array<String>) {
-  SpringApplication.run(array(javaClass<Application>()), args)
-}
+import kotlin.platform.platformStatic
 
 [EnableAutoConfiguration]
 [ComponentScan]
 [Controller]
 open class Application[Autowired](val hello:HelloService) {
 
-  [RequestMapping(array("/"))]
+  [RequestMapping(value = array("/"))]
   fun home(model: Model): String {
     model.addAttribute("message", hello.getMessage())
     return "home/hello"
+  }
+
+  class object {
+    platformStatic fun main(args: Array<String>) {
+      SpringApplication.run(array(javaClass<Application>()), args)
+    }
   }
 }
 
